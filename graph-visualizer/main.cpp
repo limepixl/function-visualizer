@@ -21,20 +21,29 @@ void update(sf::VertexArray& vArray, int n, float scale)
 	{
 		float currentX = (float)width / n * i;
 		float currentY = (float)height / 2.0f + 50.0f * sin(map(currentX, 0, width, -scale * PI, scale * PI));
-		vArray.append(sf::Vertex(sf::Vector2f(currentX, currentY), sf::Color(0, 0, 0, 255)));
+		vArray.append(sf::Vertex(sf::Vector2f(currentX, height - currentY), sf::Color(0, 0, 0, 255)));
 	}
 }
 
 int main() {
 
 	// Number of positions
-	int n = 100;
+	int n = 1000;
 	float scale = 3.0f;
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Graph visualizer");
 	sf::Color clearColor(255, 255, 255, 255);
 
 	sf::VertexArray graphArray(sf::LineStrip, n);
+
+	// Grid lines
+	sf::VertexArray gridX(sf::LineStrip, 2);
+	gridX[0] = sf::Vertex(sf::Vector2f(0.0f, height / 2.0f), sf::Color(255, 0, 0, 255));
+	gridX[1] = sf::Vertex(sf::Vector2f(width, height / 2.0f), sf::Color(255, 0, 0, 255));
+
+	sf::VertexArray gridY(sf::LineStrip, 2);
+	gridY[0] = sf::Vertex(sf::Vector2f(width / 2.0f, 0.0f), sf::Color(255, 0, 0, 255));
+	gridY[1] = sf::Vertex(sf::Vector2f(width / 2.0f, height), sf::Color(255, 0, 0, 255));
 
 	update(graphArray, n, scale);
 
@@ -52,42 +61,23 @@ int main() {
 			{
 				if(event.key.code == sf::Keyboard::Add)
 				{
-					if(event.key.control)
-					{
-						update(graphArray, ++n, scale);
-					} else
-					{
-						update(graphArray, n, ++scale);
-					}
-
-					std::cout << "n = " << n << "\tscale = " << scale << std::endl;
+					update(graphArray, n, ++scale);
 				}
 				 
 				if(event.key.code == sf::Keyboard::Subtract)
 				{
-					if(event.key.control)
-					{
-						update(graphArray, --n, scale);
-					} else
-					{
-						update(graphArray, n, --scale);
-					}
-
-					std::cout << "n = " << n << "\tscale = " << scale << std::endl;
-				}
-
-				if(event.key.code == sf::Keyboard::Space)
-				{
-					n = 100;
-					scale = 2.0f;
-
-					update(graphArray, n, scale);
+					update(graphArray, n, --scale);
 				}
 			}
 		}
 
 		window.clear(clearColor);
+
 		window.draw(graphArray);
+
+		window.draw(gridX);
+		window.draw(gridY);
+
 		window.display();
 	}
 
