@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
-#include "math.h"
+#include "utils.h"
 #include "Graph.h"
 #include <iostream>
+#include <string>
+#include <vector>
 
 // Constants
 const int width = 1280;
@@ -10,6 +12,12 @@ const int height = 720;
 int main() {
 	// Number of positions
 	int n = 1000;
+
+	// Insert the function via command prompt
+	std::string function;
+	std::getline(std::cin, function);
+
+	std::vector<std::string> splitString = parser::split(function);
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Graph visualizer");
 	sf::Color clearColor(255, 255, 255, 255);
