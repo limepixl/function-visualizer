@@ -46,14 +46,29 @@ int main() {
 			{
 				if(event.key.code == sf::Keyboard::Add)
 				{
-					graph.scale++;
-					graph.update(width, height);
+					if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+					{
+						graph.scaleY += 5;
+						graph.update(width, height);
+					} 
+					else
+					{
+						graph.scaleX += 5;
+						graph.update(width, height);
+					}
 				}
 				 
 				if(event.key.code == sf::Keyboard::Subtract)
 				{
-					graph.scale--;
-					graph.update(width, height);
+					if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+					{
+						graph.scaleY -= 5;
+						graph.update(width, height);
+					} else
+					{
+						graph.scaleX -= 5;
+						graph.update(width, height);
+					}
 				}
 			}
 		}

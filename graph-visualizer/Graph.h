@@ -6,7 +6,8 @@
 struct Graph
 {
 	int n;
-	float scale;
+	float scaleX;
+	float scaleY;
 	
 	sf::VertexArray points;
 
