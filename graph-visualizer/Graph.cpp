@@ -64,8 +64,8 @@ float Graph::calcY(float x, std::vector<Token> postfixTokens)
 				postfixTokens.erase(postfixTokens.begin() + i - 1, postfixTokens.begin() + i + 1);
 				break;
 			case POW:
-				postfixTokens[i - 2].value = pow(postfixTokens[i - 2].value, postfixTokens[i - 1].value);
-				postfixTokens.erase(postfixTokens.begin() + i - 1, postfixTokens.begin() + i + 1);
+					postfixTokens[i - 2].value = pow(postfixTokens[i - 2].value, postfixTokens[i - 1].value);
+					postfixTokens.erase(postfixTokens.begin() + i - 1, postfixTokens.begin() + i + 1);
 				break;
 			case SQRT:
 				postfixTokens[i - 1].value = sqrt(postfixTokens[i - 1].value);

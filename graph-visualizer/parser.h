@@ -47,6 +47,7 @@ struct Token
 
 namespace parser
 {
+	// Parse the function into a vector of tokens
 	std::vector<Token> parse(std::string& function);
 
 	// Parse the function contained in a string

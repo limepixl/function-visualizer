@@ -13,6 +13,7 @@ namespace parser
 		return parseShuntingYard(tokens);
 	}
 
+	// https://en.wikipedia.org/wiki/Shunting-yard_algorithm
 	std::vector<Token> parseShuntingYard(std::vector<std::string>& tokens)
 	{
 		std::vector<Token> outputQueue;
