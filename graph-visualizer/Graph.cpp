@@ -23,14 +23,14 @@ void Graph::update(int width, int height)
 		float mappedX = math::map(currentX, 0.0f, (float)width, -scaleX, scaleX);
 
 		// Actual function
-		float funVal = calcY(mappedX, postfixTokens);
-		float currentY = (float)height / 2.0f - scaleY * funVal;
+		double funVal = calcY(mappedX, postfixTokens);
+		float currentY = (float)height / 2.0f - scaleY * (float)funVal;
 
 		points.append(sf::Vertex(sf::Vector2f(currentX, currentY), sf::Color(0, 0, 0, 255)));
 	}
 }
 
-float Graph::calcY(float x, std::vector<Token> postfixTokens)
+double Graph::calcY(float x, std::vector<Token> postfixTokens)
 {
 	for(int i = 0; i < postfixTokens.size(); i++)
 	{

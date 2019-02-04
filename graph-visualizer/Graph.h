@@ -25,5 +25,5 @@ struct Graph
 
 	// Calculate the Y coordinate for a given X coordinate, and the given 
 	// evaluated function in postfix notation
-	float calcY(float x, std::vector<struct Token> postfixTokens);
+	double calcY(float x, std::vector<struct Token> postfixTokens);
 };

@@ -41,7 +41,7 @@ struct Token
 
 	std::string variableName;
 	int precedence;
-	float value;
+	double value;
 };
 
 

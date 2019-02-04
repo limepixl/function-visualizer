@@ -2,17 +2,12 @@
 #include "math.h"
 #include "Graph.h"
 #include <iostream>
-#include <string>
-#include <vector>
 
 // Constants
 const int width = 1280;
 const int height = 720;
 
 int main() {
-	// Number of positions
-	int n = 1000;
-
 	sf::RenderWindow window(sf::VideoMode(width, height), "Graph visualizer");
 	sf::Color clearColor(255, 255, 255, 255);
 
