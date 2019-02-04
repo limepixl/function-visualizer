@@ -13,10 +13,6 @@ int main() {
 	// Number of positions
 	int n = 1000;
 
-	// Insert the function via command prompt
-	std::string function;
-	std::getline(std::cin, function);
-
 	sf::RenderWindow window(sf::VideoMode(width, height), "Graph visualizer");
 	sf::Color clearColor(255, 255, 255, 255);
 
@@ -29,8 +25,8 @@ int main() {
 	gridY[0] = sf::Vertex(sf::Vector2f(width / 2.0f, 0.0f), sf::Color(255, 0, 0, 255));
 	gridY[1] = sf::Vertex(sf::Vector2f(width / 2.0f, height), sf::Color(255, 0, 0, 255));
 
-	Graph graph(function); 
-	graph.update(width, height);
+	// Vector of graphs (used for when user presses SPACE)
+	std::vector<Graph> graphs;
 
 	while(window.isOpen()) {
 		sf::Event event;
@@ -44,39 +40,75 @@ int main() {
 			// Keyboard events
 			if(event.type == sf::Event::KeyPressed)
 			{
+				// If Space is pressed, create another graph and query for a function
+				if(event.key.code == sf::Keyboard::Space)
+				{
+					// Insert the function via command prompt
+					std::string function;
+					std::getline(std::cin, function);
+
+					graphs.emplace_back(function);
+
+					for(auto& g : graphs)
+					{
+						g.update(width, height);
+					}
+				}
+
+				// If + is pressed, modify the x and y scaling
 				if(event.key.code == sf::Keyboard::Add)
 				{
 					if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 					{
-						graph.scaleY += 5;
-						graph.update(width, height);
+						for(auto& g : graphs)
+						{
+							g.scaleY += 5;
+							g.update(width, height);
+						}
 					} 
 					else
 					{
-						graph.scaleX += 5;
-						graph.update(width, height);
+						for(auto& g : graphs)
+						{
+							g.scaleX += 5;
+							g.update(width, height);
+						}
 					}
 				}
 				 
+				// If - is pressed, modify the x and y scaling
 				if(event.key.code == sf::Keyboard::Subtract)
 				{
 					if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
 					{
-						graph.scaleY -= 5;
-						graph.update(width, height);
-					} else
+						for(auto& g : graphs)
+						{
+							g.scaleY -= 5;
+							g.update(width, height);
+						}
+					} 
+					else
 					{
-						graph.scaleX -= 5;
-						graph.update(width, height);
+						for(auto& g : graphs)
+						{
+							g.scaleX -= 5;
+							g.update(width, height);
+						}
 					}
 				}
 			}
 		}
 		
+		// Clear window with full white
 		window.clear(clearColor);
 
-		window.draw(graph.points);
-
+		// Draw each graph
+		for(auto& g : graphs)
+		{
+			window.draw(g.points);
+		}
+		
+		// Draw gridlines (axes)
 		window.draw(gridX);
 		window.draw(gridY);
 
