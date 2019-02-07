@@ -2,7 +2,7 @@
 
 A parser and visualizer for functions, using the Shunting yard algorithm for parsing and SFML for visualization.
 
-## Controls
+### Controls
 Press "Space" while focused on the main window to enter a function in the console window. Then, press "Enter" to graph that function.
 
 Each function must be entered with each character being spaced out with a single space (' '). For example: `sin ( x )`
