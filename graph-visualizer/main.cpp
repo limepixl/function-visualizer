@@ -9,6 +9,8 @@ const int height = 720;
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(width, height), "Graph visualizer");
+	window.setFramerateLimit(60);
+
 	sf::Color clearColor(255, 255, 255, 255);
 
 	// Grid lines
